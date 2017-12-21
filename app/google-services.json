@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "986515754957",
+    "firebase_url": "https://winstatehack-c65d1.firebaseio.com",
+    "project_id": "winstatehack-c65d1",
+    "storage_bucket": "winstatehack-c65d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986515754957:android:2a9591ea37fa3f40",
+        "android_client_info": {
+          "package_name": "fr.wcs.winstatehack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986515754957-oac9rahigh9h803m2c3qs0clh9uda6jn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.wcs.winstatehack",
+            "certificate_hash": "1af2827eaf92ff2ca0e9a3bc259dd81febe91fc2"
+          }
+        },
+        {
+          "client_id": "986515754957-isrb9jelnip00rkbt3gql5j3srvutu94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA-lVDQVB1LGfa9y8p1DKNKPS_BQPX1l8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986515754957-isrb9jelnip00rkbt3gql5j3srvutu94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
