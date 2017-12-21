@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class FireModel {
     private HashMap<String, Integer> users = new HashMap<>();
     private String uid = "";
+    private int life = 0;
 
     public FireModel() {
     }
@@ -27,5 +28,13 @@ public class FireModel {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
     }
 }

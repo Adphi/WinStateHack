@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import fr.wcs.winstatehack.Models.FireModel;
 import fr.wcs.winstatehack.Models.UserModel;
 
-import static fr.wcs.winstatehack.Utils.Constants.AMPLITUDE_ENTRY;
+import static fr.wcs.winstatehack.Utils.Constants.FIRE_ENTRY;
 import static fr.wcs.winstatehack.Utils.Constants.USERS_ENTRY;
 
 /**
@@ -27,7 +27,6 @@ public class FirebaseController {
     private DatabaseReference mAmplitudeRef = null;
     private DatabaseReference mUsersReference = null;
     private FirebaseAmplitudeListener mAmplitudeListener = null;
-    private int mAmplitudeValue = 0;
     private UsersListener mOnUsersChangedListener = null;
 
     private ArrayList<UserModel> mUsers = new ArrayList<>();
@@ -36,7 +35,6 @@ public class FirebaseController {
 
     private FirebaseController() {
         mDatabase = FirebaseDatabase.getInstance();
-        mDatabase.setPersistenceEnabled(true);
 
         mUsersReference = mDatabase.getReference(USERS_ENTRY);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -66,7 +64,7 @@ public class FirebaseController {
     }
 
     private void initAmplitudeListener() {
-        mAmplitudeRef = mDatabase.getReference(USERS_ENTRY).child(mUser.getUid()).child(AMPLITUDE_ENTRY);
+        mAmplitudeRef = mDatabase.getReference(FIRE_ENTRY).child(mFire.getUid());
         mAmplitudeRef.addValueEventListener(mAmlitudeListener);
     }
 
@@ -75,19 +73,31 @@ public class FirebaseController {
         String uid = mUsersReference.push().getKey();
         mUser.setUid(uid);
         mUsersReference.child(uid).setValue(uid);
-
     }
 
     public void createFire(FireModel fire) {
+        mFire = fire;
+        // TODO: Create Fire on Firebase
+        initAmplitudeListener();
+    }
 
+    public void joinFire(FireModel fire) {
+        // TODO
     }
     
     private ValueEventListener mAmlitudeListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            mAmplitudeValue = dataSnapshot.getValue(Integer.class);
+            FireModel fire = dataSnapshot.getValue(FireModel.class);
+            int amp = 0;
+            if(!fire.getUsers().isEmpty()) {
+                for (int a : fire.getUsers().values()) {
+                    amp += a;
+                }
+            }
+
             if(mAmplitudeListener != null) {
-                mAmplitudeListener.onAmplitudeChanged(mAmplitudeValue);
+                mAmplitudeListener.onAmplitudeChanged(amp);
             }
         }
 
@@ -103,7 +113,7 @@ public class FirebaseController {
 
     void setAmplitudeValue(int amp) {
         if(mAmplitudeRef != null)
-        mAmplitudeRef.setValue(amp);
+        mAmplitudeRef.child(USERS_ENTRY).child(mUser.getUid()).setValue(amp);
     }
 
     public void setFirebaseAmplitudeListener(FirebaseAmplitudeListener listener) {

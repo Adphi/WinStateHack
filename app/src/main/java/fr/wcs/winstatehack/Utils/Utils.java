@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Utils {
     public static String TAG = getTAG(Utils.class);
     public static String getTAG(Object o) {
-        return String.format("HACK %s", o.getClass().getSimpleName());
+        return String.format("WWW %s", o.getClass().getSimpleName());
     }
 
     public static ArrayList<Integer> getLogTable() {
