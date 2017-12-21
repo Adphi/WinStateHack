@@ -50,6 +50,7 @@ dependencies {
 
     // Globe
     compile 'com.mousebirdconsulting.maply:Android:2.5'
+    implementation 'com.android.support:design:26.1.0'
 }
 
 
