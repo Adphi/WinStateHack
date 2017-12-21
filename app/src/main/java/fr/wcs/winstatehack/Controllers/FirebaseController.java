@@ -17,10 +17,6 @@ import fr.wcs.winstatehack.Models.UserModel;
 import static fr.wcs.winstatehack.Utils.Constants.FIRE_ENTRY;
 import static fr.wcs.winstatehack.Utils.Constants.USERS_ENTRY;
 
-/**
- * Created by adphi on 21/12/17.
- */
-
 public class FirebaseController {
     private static FirebaseController sInstance;
     private FirebaseDatabase mDatabase;

@@ -29,10 +29,11 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:src="@drawable/flame"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/buche"
-        app:layout_constraintStart_toStartOf="@+id/buche"/>
+        app:layout_constraintStart_toStartOf="@+id/buche" />
 
     <ImageView
         android:id="@+id/flameMoyen"
