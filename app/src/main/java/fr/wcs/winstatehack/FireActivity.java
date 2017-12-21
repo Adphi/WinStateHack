@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import fr.wcs.winstatehack.Controllers.FirebaseController;
 import fr.wcs.winstatehack.Controllers.SoundMeterController;
+import fr.wcs.winstatehack.Utils.Utils;
 
 public class FireActivity extends AppCompatActivity {
+    private final String TAG = Utils.getTAG(this);
+
     private ImageView mFlameGrand;
     private ImageView mFlameMoyen;
     private ImageView mFlamePetit;
@@ -22,14 +26,16 @@ public class FireActivity extends AppCompatActivity {
 
     private SoundMeterController mSoundMeterController = null;
     private FirebaseController mFirebaseController;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_fire);
 
         mFirebaseController = FirebaseController.getInstance();
 
+        mProgressBar = findViewById(R.id.progressBar);
         mFlameGrand = findViewById(R.id.flamegrand);
         mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
         mFlameMoyen = findViewById(R.id.flameMoyen);
@@ -75,27 +81,25 @@ public class FireActivity extends AppCompatActivity {
     }
 
     private void init() {
+        // TODO: remove (direct sound from phone used for testing)
         mSoundMeterController = SoundMeterController.getInstance();
-        /*mSoundMeterController.setSoundMeterListener(amp -> runOnUiThread(() -> {
-            ObjectAnimator.ofInt(null, "progress", amp)
+        mSoundMeterController.setSoundMeterListener(amp -> runOnUiThread(() -> {
+            float alpha = (float) amp / 100;
+
+            ObjectAnimator.ofFloat(mFlameGrand, "alpha", alpha)
                     .setDuration(GRAIN_SIZE)
                     .start();
-        }));*/
-        mFirebaseController.setFirebaseAmplitudeListener(amp -> runOnUiThread(() -> {
-
         }));
-        mSoundMeterController.start();
+        // Real Value to display
+        mFirebaseController.setFirebaseAmplitudeListener(amp -> runOnUiThread(() -> {
+            // TODO: display Animation
+        }));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(SoundMeterController.permissionGranted && mSoundMeterController != null){
-            mSoundMeterController.start();
-        }
-        else if(SoundMeterController.permissionGranted) {
-            mSoundMeterController.start();
-        }
+        mSoundMeterController.start();
     }
 
     @Override
