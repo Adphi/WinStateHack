@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WinStateHack</string>
+    <string name="wins">wins</string>
+    <string name="hackteurs">hackteurs</string>
 </resources>
