@@ -96,8 +96,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
                 android:paddingTop="8dp"
-                android:text="3"
-                android:textSize="18sp" />
+                android:text="3" />
 
             <TextView
                 android:id="@+id/wins"
@@ -167,6 +166,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonMessage" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_button"
+            app:srcCompat="@drawable/logoWinState"
+            tools:layout_editor_absoluteX="121dp"
+            tools:layout_editor_absoluteY="80dp" />
 
     </android.support.constraint.ConstraintLayout>
 
