@@ -167,14 +167,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonMessage" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circle_button"
-            app:srcCompat="@drawable/logowinstate"
-            tools:layout_editor_absoluteX="121dp"
-            tools:layout_editor_absoluteY="80dp" />
+
 
     </android.support.constraint.ConstraintLayout>
 

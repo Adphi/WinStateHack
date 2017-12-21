@@ -13,6 +13,8 @@ import fr.wcs.winstatehack.Utils.Utils;
 
 public class SoundMeterController {
 
+    public static boolean permissionGranted = false;
+
     private static SoundMeterController sInstance;
     private SoundMeter mSoundMeter;
     private ArrayList<Integer> mLevelTable;
@@ -33,8 +35,11 @@ public class SoundMeterController {
             @Override
             public void run() {
                 int amp = (int) (mSoundMeter.getAmplitude() / 32767f * 100);
-                mMeterListener.onMeterChanged(amp);
+                if(mMeterListener != null) {
+                    mMeterListener.onMeterChanged(amp);
+                }
                 mFirebaseController.setAmplitudeValue(amp);
+
             }
         }, 0, 250);
     }

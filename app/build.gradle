@@ -37,20 +37,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.6.2'
     implementation 'com.google.firebase:firebase-auth:11.6.2'
     compile 'com.google.android.gms:play-services-auth:11.6.2'
-
-    // FirebaseUI for Cloud Storage
-    compile 'com.firebaseui:firebase-ui-storage:3.1.0'
-
-    // Glide
-    compile 'com.github.bumptech.glide:glide:4.3.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
-
-    //Crop image
-    compile 'com.theartofdev.edmodo:android-image-cropper:2.5.+'
-
-    // Globe
-    compile 'com.mousebirdconsulting.maply:Android:2.5'
-    implementation 'com.android.support:design:26.1.0'
 }
 
 
