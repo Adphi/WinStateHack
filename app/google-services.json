@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "986515754957-8vc2kgrn23rltpdsejj6d8bhtm1p35fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.wcs.winstatehack",
+            "certificate_hash": "b5ff70c69d8cb3c1fa689159c3b74719cb7a874e"
+          }
+        },
+        {
           "client_id": "986515754957-oac9rahigh9h803m2c3qs0clh9uda6jn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
