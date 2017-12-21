@@ -14,7 +14,7 @@ import fr.wcs.winstatehack.Controllers.FirebaseController;
 import fr.wcs.winstatehack.Controllers.SoundMeterController;
 import fr.wcs.winstatehack.Utils.Utils;
 
-public class MainActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
 
     private final String TAG = Utils.getTAG(this);
 
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         Log.d(TAG, "onCreate: Audio Permissions: " + mPermissionToRecordAccepted);
         mTextView = findViewById(R.id.textView);
