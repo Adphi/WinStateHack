@@ -22,16 +22,19 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         mFlameGrand = findViewById(R.id.flamegrand);
+        mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
         mFlameMoyen = findViewById(R.id.flameMoyen);
+        mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
         mFlamePetit = findViewById(R.id.flamePetit);
+        mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_red_light),PorterDuff.Mode.MULTIPLY);
         mBuche = findViewById(R.id.buche);
-        animateImageView(mFlameGrand, android.R.color.holo_orange_light,1000);
-        animateImageView(mFlamePetit, android.R.color.holo_red_dark, 800);
-        animateImageView(mFlameMoyen, android.R.color.holo_orange_dark, 700);
+        animateImageView(mFlameGrand, android.R.color.holo_orange_light,1000, 200);
+        animateImageView(mFlamePetit, android.R.color.holo_red_dark, 1000, 400);
+        animateImageView(mFlameMoyen, android.R.color.holo_orange_dark, 1000, 600);
     }
 
 
-    public void animateImageView(final ImageView v,@ColorRes int color, int duration) {
+    public void animateImageView(final ImageView v,@ColorRes int color, int duration, int delay) {
         final int orange = getResources().getColor(color);
 
         final ValueAnimator colorAnim = ObjectAnimator.ofFloat(0f, 1f);
@@ -45,6 +48,7 @@ public class Main2Activity extends AppCompatActivity {
         });
 
         colorAnim.setDuration(duration);
+        colorAnim.setStartDelay(delay);
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.setRepeatCount(-1);
         colorAnim.start();
