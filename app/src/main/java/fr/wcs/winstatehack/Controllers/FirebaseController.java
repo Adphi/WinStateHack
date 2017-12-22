@@ -68,7 +68,9 @@ public class FirebaseController {
         mUser = user;
         String uid = mUsersReference.push().getKey();
         mUser.setUid(uid);
-        mUsersReference.child(uid).setValue(uid);
+
+        mUsersReference.child(uid).setValue(mUser);
+
     }
 
     public void createFire(FireModel fire) {

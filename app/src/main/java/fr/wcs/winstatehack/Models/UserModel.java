@@ -11,8 +11,10 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(String name) {
+    public UserModel(String name, String uid) {
         this.name = name;
+        this.fires= new HashMap<>();
+        this.uid = uid;
     }
 
     public String getName() {
