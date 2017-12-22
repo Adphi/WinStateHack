@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="fr.wcs.winstatehack.SensorActivity">
+
+    <ImageView
+        android:id="@+id/imageViewBottle"
+        android:layout_width="258dp"
+        android:layout_height="332dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/champagne_bottle" />
+
+    <ImageView
+        android:id="@+id/imageViewCork"
+        android:layout_width="59dp"
+        android:layout_height="48dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewBottle"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewBottle"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imageViewBottle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cork" />
+
+    <TextView
+        android:id="@+id/textViewShake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="SHAKE !!!"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewBottle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNbShakes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="50"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewShake"
+        app:layout_constraintStart_toStartOf="@+id/textViewShake"
+        app:layout_constraintTop_toBottomOf="@+id/textViewShake" />
+</android.support.constraint.ConstraintLayout>

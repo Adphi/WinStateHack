@@ -2,12 +2,12 @@ package fr.wcs.winstatehack;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextViewUserName = findViewById(R.id.textViewName);
@@ -67,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonFriends = findViewById(R.id.buttonMessage);
         buttonFriends.setOnClickListener(v -> startActivity(new Intent(this, FriendsActivity.class)));
+
+        Button buttonShake = findViewById(R.id.buttonShake);
+        buttonShake.setOnClickListener(v -> startActivity(new Intent(this, SensorActivity.class)));
     }
 
     @Override

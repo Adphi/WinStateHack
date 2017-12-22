@@ -2,10 +2,6 @@ package fr.wcs.winstatehack.Models;
 
 import java.util.HashMap;
 
-/**
- * Created by adphi on 21/12/17.
- */
-
 public class UserModel {
     private String name = "";
     private HashMap<String, Boolean> fires = new HashMap<>();
