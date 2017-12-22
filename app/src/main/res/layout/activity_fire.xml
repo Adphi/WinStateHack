@@ -10,21 +10,6 @@
     tools:layout_editor_absoluteY="25dp">
 
     <ImageView
-        android:id="@+id/buche"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/buche"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71000004"/>
-
-    <ImageView
         android:id="@+id/flamegrand"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -58,6 +43,19 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/buche"
         app:layout_constraintStart_toStartOf="@+id/buche"/>
+
+    <ImageView
+        android:id="@+id/buche"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/buche"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
     <ProgressBar
         android:id="@+id/progressBarLife"
