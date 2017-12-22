@@ -2,6 +2,7 @@ package fr.wcs.winstatehack;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button buttonFriends = findViewById(R.id.buttonMessage);
         buttonFriends.setOnClickListener(v -> startActivity(new Intent(this, FriendsActivity.class)));
+
+        Button buttonShake = findViewById(R.id.buttonShake);
+        buttonShake.setOnClickListener(v -> startActivity(new Intent(this, SensorActivity.class)));
     }
 
     @Override
