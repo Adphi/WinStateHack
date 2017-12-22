@@ -9,11 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import fr.wcs.winstatehack.Controllers.SoundMeterController;
+import fr.wcs.winstatehack.Models.UserModel;
 import fr.wcs.winstatehack.Utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = Utils.getTAG(this);
 
     FirebaseAuth mAuth;
+    FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+    private TextView mTextViewUserName;
 
     // Requesting permission to RECORD_AUDIO
     private boolean mPermissionToRecordAccepted = false;
@@ -33,6 +42,32 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTextViewUserName = findViewById(R.id.textViewName);
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("username");
+
+        DatabaseReference userRef = mFirebaseDatabase.getReference("users");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    UserModel user = userSnapshot.getValue(UserModel.class);
+                    if (user.getName().equals(name)){
+                        mTextViewUserName.setText(user.getName());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuth.signInAnonymously()
