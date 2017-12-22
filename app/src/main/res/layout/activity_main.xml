@@ -176,7 +176,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/circle_button"
-            app:layout_constraintBottom_toTopOf="@+id/buttonFire"
+            app:layout_constraintBottom_toTopOf="@+id/imageButtonFire"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/buttonMessage" />
 
