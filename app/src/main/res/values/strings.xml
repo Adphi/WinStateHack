@@ -9,4 +9,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="splash">Hello Winers</string>
+    <string name="login_user_name">entrez votre pseudo</string>
+    <string name="login_button_confirm">OK</string>
+    <string name="login_quote">“Le sourire est le commencement de la grimace.”</string>
 </resources>

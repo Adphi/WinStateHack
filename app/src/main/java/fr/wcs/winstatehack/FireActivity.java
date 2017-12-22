@@ -35,7 +35,7 @@ public class FireActivity extends AppCompatActivity {
 
         mFirebaseController = FirebaseController.getInstance();
 
-        mProgressBar = findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBarLife);
         mFlameGrand = findViewById(R.id.flamegrand);
         mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
         mFlameMoyen = findViewById(R.id.flameMoyen);
