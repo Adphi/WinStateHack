@@ -36,10 +36,13 @@ public class FireActivity extends AppCompatActivity {
 
         mFlameGrand = findViewById(R.id.flamegrand);
         mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
+        mFlameGrand.setAlpha(0f);
         mFlameMoyen = findViewById(R.id.flameMoyen);
-        mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
+        mFlameMoyen.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
+        mFlameMoyen.setAlpha(0f);
         mFlamePetit = findViewById(R.id.flamePetit);
-        mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_red_light),PorterDuff.Mode.MULTIPLY);
+        mFlamePetit.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_red_light),PorterDuff.Mode.MULTIPLY);
+        mFlamePetit.setAlpha(0f);
         mBuche = findViewById(R.id.buche);
         animateImageView(mFlameGrand, android.R.color.holo_orange_light,1000, 200);
         animateImageView(mFlamePetit, android.R.color.holo_red_dark, 1000, 400);
@@ -81,7 +84,10 @@ public class FireActivity extends AppCompatActivity {
     private void init() {
         // TODO: remove (direct sound from phone used for testing)
         mSoundMeterController = SoundMeterController.getInstance();
-        mSoundMeterController.setSoundMeterListener(amp -> runOnUiThread(() -> {
+        // Real Value to display
+        mFirebaseController.setFirebaseAmplitudeListener(amp -> runOnUiThread(() -> {
+            // TODO: display Animation
+            Log.d(TAG, "init: " + amp);
             float alpha = (float) amp / 100;
             float alpha1 = 0;
             float alpha2 = 0;
@@ -96,7 +102,7 @@ public class FireActivity extends AppCompatActivity {
             else if(alpha > 2 && alpha <= 3) {
                 alpha1 = 1;
                 alpha2 = 1;
-                alpha3 = alpha - 1;
+                alpha3 = alpha - 2;
             }
             else if (alpha > 3) {
                 alpha1 = 1;
@@ -113,11 +119,6 @@ public class FireActivity extends AppCompatActivity {
             ObjectAnimator.ofFloat(mFlameGrand, "alpha", alpha3)
                     .setDuration(GRAIN_SIZE)
                     .start();
-        }));
-        // Real Value to display
-        mFirebaseController.setFirebaseAmplitudeListener(amp -> runOnUiThread(() -> {
-            // TODO: display Animation
-            Log.d(TAG, "init: " + amp);
         }));
     }
 
