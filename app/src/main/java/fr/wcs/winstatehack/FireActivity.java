@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -93,12 +94,14 @@ public class FireActivity extends AppCompatActivity {
         // Real Value to display
         mFirebaseController.setFirebaseAmplitudeListener(amp -> runOnUiThread(() -> {
             // TODO: display Animation
+            Log.d(TAG, "init: " + amp);
         }));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseController.getInstance().joinFire(null);
         mSoundMeterController.start();
     }
 

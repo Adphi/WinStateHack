@@ -52,7 +52,7 @@ public class FirebaseController {
     }
 
     private void initAmplitudeListener() {
-        mAmplitudeRef = mDatabase.getReference(FIRE_ENTRY).child(mFire.getUid());
+        mAmplitudeRef = mDatabase.getReference(FIRE_ENTRY);
         mAmplitudeRef.addValueEventListener(mAmlitudeListener);
     }
 
@@ -93,14 +93,14 @@ public class FirebaseController {
         initUser();
     }
 
-    public void createFire(FireModel fire) {
-        mFire = fire;
-        // TODO: Create Fire on Firebase
+    public void createFire() {
         initAmplitudeListener();
+        // TODO: Create Fire on Firebase
     }
 
     public void joinFire(FireModel fire) {
         // TODO
+        initAmplitudeListener();
     }
     
     private ValueEventListener mAmlitudeListener = new ValueEventListener() {
