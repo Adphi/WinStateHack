@@ -9,7 +9,6 @@ import android.support.annotation.ColorRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import fr.wcs.winstatehack.Controllers.FirebaseController;
 import fr.wcs.winstatehack.Controllers.SoundMeterController;
@@ -27,7 +26,6 @@ public class FireActivity extends AppCompatActivity {
 
     private SoundMeterController mSoundMeterController = null;
     private FirebaseController mFirebaseController;
-    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,6 @@ public class FireActivity extends AppCompatActivity {
 
         mFirebaseController = FirebaseController.getInstance();
 
-        mProgressBar = findViewById(R.id.progressBarLife);
         mFlameGrand = findViewById(R.id.flamegrand);
         mFlameGrand.getDrawable().setColorFilter(getResources().getColor(android.R.color.holo_orange_light),PorterDuff.Mode.MULTIPLY);
         mFlameMoyen = findViewById(R.id.flameMoyen);
@@ -86,8 +83,34 @@ public class FireActivity extends AppCompatActivity {
         mSoundMeterController = SoundMeterController.getInstance();
         mSoundMeterController.setSoundMeterListener(amp -> runOnUiThread(() -> {
             float alpha = (float) amp / 100;
+            float alpha1 = 0;
+            float alpha2 = 0;
+            float alpha3 = 0;
+            if(alpha > 0 && alpha <= 1) {
+                alpha1 = alpha;
+            }
+            else if(alpha > 1 && alpha <= 2) {
+                alpha1 = 1;
+                alpha2 = alpha - 1;
+            }
+            else if(alpha > 2 && alpha <= 3) {
+                alpha1 = 1;
+                alpha2 = 1;
+                alpha3 = alpha - 1;
+            }
+            else if (alpha > 3) {
+                alpha1 = 1;
+                alpha2 = 1;
+                alpha3 = 1;
+            }
 
-            ObjectAnimator.ofFloat(mFlameGrand, "alpha", alpha)
+            ObjectAnimator.ofFloat(mFlamePetit, "alpha", alpha1)
+                    .setDuration(GRAIN_SIZE)
+                    .start();
+            ObjectAnimator.ofFloat(mFlameMoyen, "alpha", alpha2)
+                    .setDuration(GRAIN_SIZE)
+                    .start();
+            ObjectAnimator.ofFloat(mFlameGrand, "alpha", alpha3)
                     .setDuration(GRAIN_SIZE)
                     .start();
         }));
