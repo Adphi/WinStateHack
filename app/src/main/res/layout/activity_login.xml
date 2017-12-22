@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:hint="@string/login_user_name"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorGrey"
         android:textColor="@color/colorPrimaryDark"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/buttonLoginConfirm"
