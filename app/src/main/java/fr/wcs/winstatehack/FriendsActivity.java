@@ -22,9 +22,9 @@ public class FriendsActivity extends AppCompatActivity {
 
         ArrayList<UserModel> users = firebaseController.getUsers();
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFriends);
-        FriendsAdapter friendsAdapter = new FriendsAdapter(users);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        FriendsAdapter friendsAdapter = new FriendsAdapter(users);
         recyclerView.setAdapter(friendsAdapter);
         firebaseController.setUsersListener(user -> friendsAdapter.notifyDataSetChanged());
     }

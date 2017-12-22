@@ -1,7 +1,5 @@
 package fr.wcs.winstatehack.Controllers;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,32 +26,17 @@ public class FirebaseController {
     private DatabaseReference mUsersReference = null;
     private FirebaseAmplitudeListener mAmplitudeListener = null;
     private UsersListener mOnUsersChangedListener = null;
+    private String mUserUid = "";
 
     private ArrayList<UserModel> mUsers = new ArrayList<>();
     private UserModel mUser = null;
     private FireModel mFire = null;
+    private UserReadyListener mUserReadyListener = null;
 
     private FirebaseController() {
         mDatabase = FirebaseDatabase.getInstance();
 
         mUsersReference = mDatabase.getReference(USERS_ENTRY);
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user == null) {
-            return;
-        }
-
-        mUsersReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mUser = dataSnapshot.getValue(UserModel.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public static FirebaseController getInstance() {
@@ -63,18 +46,51 @@ public class FirebaseController {
         return sInstance;
     }
 
+    public void setUserUid(String uid) {
+        mUserUid = uid;
+        initUser();
+    }
+
     private void initAmplitudeListener() {
         mAmplitudeRef = mDatabase.getReference(FIRE_ENTRY).child(mFire.getUid());
         mAmplitudeRef.addValueEventListener(mAmlitudeListener);
     }
 
+    private void initUser() {
+        mUsersReference.child(mUserUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mUser = dataSnapshot.getValue(UserModel.class);
+                if(mUserReadyListener != null) {
+                    mUserReadyListener.onUserReady(mUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        mUsersReference.addChildEventListener(mUsersListener);
+    }
+
+    public UserModel getUser(){
+        return mUser;
+    }
+
+    public void setUserReadyListener(UserReadyListener listener) {
+        mUserReadyListener = listener;
+    }
+
+    public interface UserReadyListener {
+        void onUserReady(UserModel user);
+    }
+
     public void createUser(UserModel user) {
         mUser = user;
-        String uid = mUsersReference.push().getKey();
-        mUser.setUid(uid);
-
-        mUsersReference.child(uid).setValue(mUser);
-
+        mUser.setUid(mUserUid);
+        mUsersReference.child(mUserUid).setValue(mUser);
+        initUser();
     }
 
     public void createFire(FireModel fire) {
@@ -139,7 +155,7 @@ public class FirebaseController {
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             UserModel user = dataSnapshot.getValue(UserModel.class);
             mUsers.add(user);
-            if(mUsersListener != null) {
+            if(mOnUsersChangedListener != null) {
                 mOnUsersChangedListener.onUsersChanged(user);
             }
         }
@@ -150,7 +166,7 @@ public class FirebaseController {
             UserModel user = findUser(updatedUser);
             mUsers.remove(user);
             mUsers.add(updatedUser);
-            if(mUsersListener != null) {
+            if(mOnUsersChangedListener != null) {
                 mOnUsersChangedListener.onUsersChanged(updatedUser);
             }
         }
@@ -159,7 +175,7 @@ public class FirebaseController {
         public void onChildRemoved(DataSnapshot dataSnapshot) {
             UserModel user = dataSnapshot.getValue(UserModel.class);
             mUsers.remove(user);
-            if(mUsersListener != null) {
+            if(mOnUsersChangedListener != null) {
                 mOnUsersChangedListener.onUsersChanged(user);
             }
         }
