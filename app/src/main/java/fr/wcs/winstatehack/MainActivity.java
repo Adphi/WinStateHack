@@ -13,13 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import fr.wcs.winstatehack.Controllers.FirebaseController;
 import fr.wcs.winstatehack.Controllers.SoundMeterController;
 import fr.wcs.winstatehack.Models.UserModel;
 import fr.wcs.winstatehack.Utils.Utils;
@@ -38,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private String [] permissions = {android.Manifest.permission.RECORD_AUDIO};
+    private UserModel mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,46 +45,17 @@ public class MainActivity extends AppCompatActivity {
         mImageButtonFire = findViewById(R.id.imageButtonFire);
         mImageButtonFire.setColorFilter(getResources().getColor(R.color.colorPrimaryDark));
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("username");
-
-        DatabaseReference userRef = mFirebaseDatabase.getReference("users");
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    UserModel user = userSnapshot.getValue(UserModel.class);
-                    if (user.getName().equals(name)){
-                        mTextViewUserName.setText(user.getName());
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInAnonymously:success ");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Log.d(TAG, "User Uid: " + user.getUid());
-                    } else {
-                        // If sign in fails, display a message to the user.
-
-                    }
-
-                    // ...
-                });
+        FirebaseController firebaseController = FirebaseController.getInstance();
+        mUser = firebaseController.getUser();
+        if(mUser != null) {
+            mTextViewUserName.setText(mUser.getName());
+        }
+        else {
+            firebaseController.setUserReadyListener(u -> {
+                mUser = u;
+                mTextViewUserName.setText(mUser.getName());
+            });
+        }
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         Log.d(TAG, "onCreate: Audio Permissions: " + mPermissionToRecordAccepted);
@@ -113,12 +81,5 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!mPermissionToRecordAccepted) finish();
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 }

@@ -54,7 +54,6 @@ public class loginActivity extends AppCompatActivity {
                 mUserModel.setName(mUserName);
                 mUser.createUser(mUserModel);
                 Intent intent = new Intent(loginActivity.this,MainActivity.class);
-                intent.putExtra("username", mUserModel.getName());
                 startActivity(intent);
             }
         });
