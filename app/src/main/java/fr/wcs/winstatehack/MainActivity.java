@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonFriends = findViewById(R.id.buttonMessage);
         buttonFriends.setOnClickListener(v -> startActivity(new Intent(this, FriendsActivity.class)));
 
-        Button buttonShake = findViewById(R.id.buttonShake);
+        ImageButton buttonShake = findViewById(R.id.buttonShake);
         buttonShake.setOnClickListener(v -> startActivity(new Intent(this, SensorActivity.class)));
     }
 
