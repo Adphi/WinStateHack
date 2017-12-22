@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
     private TextView mTextViewUserName;
+    private ImageButton mImageButtonFire;
 
     // Requesting permission to RECORD_AUDIO
     private boolean mPermissionToRecordAccepted = false;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextViewUserName = findViewById(R.id.textViewName);
+        mImageButtonFire = findViewById(R.id.imageButtonFire);
+        mImageButtonFire.setColorFilter(getResources().getColor(R.color.colorPrimaryDark));
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
@@ -88,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         Log.d(TAG, "onCreate: Audio Permissions: " + mPermissionToRecordAccepted);
 
-        Button buttonFire = findViewById(R.id.buttonFire);
-        buttonFire.setOnClickListener(v -> {
+        mImageButtonFire = findViewById(R.id.imageButtonFire);
+        mImageButtonFire.setOnClickListener(v -> {
             startActivity(new Intent(this, FireActivity.class));
         });
 
